@@ -1,0 +1,6 @@
+jwt_js.settings:
+  title: 'JWT Expiry Time'
+  route_name: jwt_js.settings
+  description: 'Set the JWT expiry time in hour.'
+  parent: system.admin_config_system
+  weight: 100

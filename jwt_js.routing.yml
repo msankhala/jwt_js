@@ -1,0 +1,9 @@
+jwt_js.settings:
+  path: '/set-token-expiry'
+  defaults:
+    _form: '\Drupal\jwt_js\Form\JwtExpiryConfigForm'
+    _title: 'Set JWT expiry time'
+  requirements:
+    _role: 'administrator'
+  options:
+    _admin_route: TRUE

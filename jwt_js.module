@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * @file
+ * Get jwt on signin.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function jwt_js_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.jwt_js':
+      return t('
+        <h2>Instructions</h2>
+        <p>This module requires no configuration... <strong>Just install the module to use it!</strong></p>
+      ');
+  }
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function jwt_js_page_attachments(&$page) {
+  $tempstore = \Drupal::service('tempstore.private')->get('jwt_js');
+  $token = $tempstore->get('jwt_access_token');
+  if (!empty($token)) {
+    \Drupal::logger('JWT')->notice($token);
+    $page['#attached']['library'][] = 'jwt_js/jwt-js';
+    $page['#attached']['drupalSettings']['user']['access_token'] = $token;
+  }
+}
+
+/**
+ * Implements hook_user_logout().
+ */
+function jwt_js_user_logout() {
+  $tempstore = \Drupal::service('tempstore.private')->get('jwt_js');
+  try {
+    $tempstore->delete('jwt_access_token');
+  }
+  catch (\Exception $error) {
+    \Drupal::logger('JWT_expired')->notice($error);
+  }
+}

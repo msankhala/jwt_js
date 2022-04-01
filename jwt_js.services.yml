@@ -1,0 +1,6 @@
+services:
+  jwt_js.login_response_listener:
+    class: Drupal\jwt_js\EventSubscriber\JwtJsSubscriber
+    arguments: ['@current_route_match', '@jwt.authentication.jwt', '@current_user', '@tempstore.private', '@config.factory']
+    tags:
+      - { name: event_subscriber }

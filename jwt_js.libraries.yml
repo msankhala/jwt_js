@@ -1,0 +1,7 @@
+jwt-js:
+  version: 1.x
+  js:
+    js/jwt.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
