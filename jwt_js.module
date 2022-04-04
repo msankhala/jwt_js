@@ -5,6 +5,7 @@
  * Get jwt on signin.
  */
 
+use Drupal\Core\Asset\AttachedAssetsInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
@@ -21,16 +22,19 @@ function jwt_js_help($route_name, RouteMatchInterface $route_match) {
 }
 
 /**
+ * Implements hook_js_settings_alter().
+ */
+function jwt_js_js_settings_alter(array &$settings, AttachedAssetsInterface $assets) {
+  // Add settings.
+  $tempstore = \Drupal::service('tempstore.private')->get('jwt_js');
+  $settings['user']['access_token'] = $tempstore->get('jwt_access_token');
+}
+
+/**
  * Implements hook_page_attachments().
  */
 function jwt_js_page_attachments(&$page) {
-  $tempstore = \Drupal::service('tempstore.private')->get('jwt_js');
-  $token = $tempstore->get('jwt_access_token');
-  if (!empty($token)) {
-    \Drupal::logger('JWT')->notice($token);
-    $page['#attached']['library'][] = 'jwt_js/jwt-js';
-    $page['#attached']['drupalSettings']['user']['access_token'] = $token;
-  }
+  $page['#attached']['library'][] = 'jwt_js/jwt-js';
 }
 
 /**
