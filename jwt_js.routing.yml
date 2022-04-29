@@ -7,3 +7,19 @@ jwt_js.settings:
     _role: 'administrator'
   options:
     _admin_route: TRUE
+
+jwt_js.refresh_access_token:
+  path: '/jwt-js/refresh-access-token'
+  defaults:
+    _controller: '\Drupal\jwt_js\Controller\JwtJsController::refreshToken'
+    _title: 'Refresh Token'
+  requirements:
+    _permission: 'access content'
+
+jwt_js.refresh_access_token_page:
+  path: '/jwt-js/refresh-access-token-page'
+  defaults:
+    _controller: '\Drupal\jwt_js\Controller\JwtJsController::refreshTokenPage'
+    _title: 'Refresh Token page'
+  requirements:
+    _permission: 'access content'
