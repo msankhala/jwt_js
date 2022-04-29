@@ -187,4 +187,5 @@ class JwtJsSubscriber implements EventSubscriberInterface {
     $tempStoreFactory = $this->tempStoreFactory->get('jwt_js');
     $tempStoreFactory->set('jwt_access_token', $access_token);
   }
+
 }
