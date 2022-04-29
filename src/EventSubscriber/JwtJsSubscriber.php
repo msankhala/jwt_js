@@ -122,7 +122,7 @@ class JwtJsSubscriber implements EventSubscriberInterface {
    */
   public function isAccessTokenExpired($jwt) {
     try {
-      // Token will not decode if expired.
+      // Token will not decode if expired and it will throw an exception.
       $this->transcoder->decode($jwt);
       return FALSE;
     }
