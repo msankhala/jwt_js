@@ -63,6 +63,8 @@ class JwtJsSubscriber implements EventSubscriberInterface {
    *
    * @param \Drupal\jwt\Authentication\Provider\JwtAuth $jwt_auth
    *   JWT Auth service.
+   * @param \Drupal\jwt\Transcoder\JwtTranscoderInterface $transcoder
+   *   The JWT Transcoder service.
    * @param \Drupal\Core\Session\AccountProxyInterface $current_user
    *   Current logged in user.
    * @param \Drupal\Core\TempStore\PrivateTempStoreFactory $temp_store_factory
