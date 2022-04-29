@@ -110,11 +110,10 @@ class JwtJsSubscriber implements EventSubscriberInterface {
 
     // Check if JWT token has expired stored in user tempstore.
     // If token has expired then generate new token and store in user tempstore.
-    $tempStoreFactory = $this->tempStoreFactory->get('jwt_js');
-    $jwt = $tempStoreFactory->get('jwt_access_token');
+    $jwt = $this->getAccessToken();
     if ($this->isAccessTokenExpired($jwt)) {
       $access_token = $this->jwtAuth->generateToken();
-      $tempStoreFactory->set('jwt_access_token', $access_token);
+      $this->setAccessToken('jwt_access_token', $access_token);
     }
   }
 
@@ -181,4 +180,11 @@ class JwtJsSubscriber implements EventSubscriberInterface {
     return $tempStoreFactory->get('jwt_access_token');
   }
 
+  /**
+   * Set the JWT access token stored in the user tempstore.
+   */
+  public function setAccessToken($access_token) {
+    $tempStoreFactory = $this->tempStoreFactory->get('jwt_js');
+    $tempStoreFactory->set('jwt_access_token', $access_token);
+  }
 }
