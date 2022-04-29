@@ -141,7 +141,7 @@ class JwtJsSubscriber implements EventSubscriberInterface {
     $event->addClaim('iat', time());
     $configFactory = $this->configFactory->get('jwt_js.settings');
     $expire_after = $configFactory->get('expiry_time');
-    $expiry_after = $expire_after ? "+$expire_after min" : "+1 min";
+    $expiry_after = $expire_after ? "+$expire_after hour" : "+1 hour";
     $event->addClaim('exp', strtotime($expiry_after));
   }
 
