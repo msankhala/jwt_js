@@ -5,8 +5,9 @@
  * Get jwt on signin.
  */
 
-use Drupal\Core\Asset\AttachedAssetsInterface;
+use Drupal\user\UserInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Asset\AttachedAssetsInterface;
 
 /**
  * Implements hook_help().
@@ -46,6 +47,22 @@ function jwt_js_user_logout() {
     $tempstore->delete('jwt_access_token');
   }
   catch (\Exception $error) {
-    \Drupal::logger('JWT_expired')->notice($error);
+    \Drupal::logger('JWT_error')->notice($error);
   }
+}
+
+/**
+ * Implements hook_user_login().
+ */
+function jwt_js_user_login(UserInterface $account) {
+  // Generate the jwt token on user login with the help of
+  // users_jwt.authentication.jwt service and store in private tempstore.
+  try {
+    $jwt_token = \Drupal::service('jwt.authentication.jwt')->generateToken();
+  }
+  catch (\Exception $error) {
+    \Drupal::logger('JWT_error')->notice($error);
+  }
+  $tempstore = \Drupal::service('tempstore.private')->get('jwt_js');
+  $tempstore->set('jwt_access_token', $jwt_token);
 }
