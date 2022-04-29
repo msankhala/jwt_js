@@ -126,7 +126,6 @@ class JwtJsSubscriber implements EventSubscriberInterface {
       return FALSE;
     }
     catch (JwtDecodeException $e) {
-      d('JWT token has expired');
       return TRUE;
     }
   }
