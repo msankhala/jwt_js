@@ -173,4 +173,12 @@ class JwtJsSubscriber implements EventSubscriberInterface {
     return $tempStoreFactory->get('jwt_access_token');
   }
 
+  /**
+   * Get the JWT access token stored in the user tempstore.
+   */
+  public function getAccessToken() {
+    $tempStoreFactory = $this->tempStoreFactory->get('jwt_js');
+    return $tempStoreFactory->get('jwt_access_token');
+  }
+
 }
