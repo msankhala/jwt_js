@@ -100,11 +100,12 @@ class JwtJsSubscriber implements EventSubscriberInterface {
    * Add JWT access token to user login API response.
    */
   public function onResponse(FilterResponseEvent $event) {
-    // Get response.
-    $response = $event->getResponse();
+    // // Get response.
+    // $response = $event->getResponse();
+    // $response->getStatusCode() !== 200
 
-    // Ensure not error response.
-    if ($response->getStatusCode() !== 200 || $this->currentUser->isAnonymous()) {
+    // Ensure if user is not anonymous.
+    if ($this->currentUser->isAnonymous()) {
       return;
     }
 

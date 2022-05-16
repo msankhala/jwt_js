@@ -1,6 +1,6 @@
-name: Get JWT in DrupalSettings
+name: JWT JS
 type: module
-description: 'A module to get JWT on login and pass to DrupalSettings'
+description: 'A module that generates jwt token on login and pass to drupalSettings'
 package: Foundation
 core_version_requirement: ^8.8 || ^9
 dependencies:
