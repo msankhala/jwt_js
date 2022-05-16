@@ -33,13 +33,6 @@ function jwt_js_js_settings_alter(array &$settings, AttachedAssetsInterface $ass
 }
 
 /**
- * Implements hook_page_attachments().
- */
-function jwt_js_page_attachments(&$page) {
-  // $page['#attached']['library'][] = 'jwt_js/jwt-js';
-}
-
-/**
  * Implements hook_user_logout().
  */
 function jwt_js_user_logout() {
