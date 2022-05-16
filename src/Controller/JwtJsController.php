@@ -43,10 +43,15 @@ class JwtJsController extends ControllerBase {
    * Refresh the JWT on token.
    */
   public function refreshToken() {
+    $access_token = NULL;
     $response = new AjaxResponse();
+    // Only refresh the token if the user is logged in.
+    if ($this->currentUser->isAuthenticated()) {
+      $access_token = $this->jwtJsSubscriber->refreshAccessToken();
+    }
     $command = new SettingsCommand([
       'user' => [
-        'access_token' => $this->jwtJsSubscriber->refreshAccessToken(),
+        'access_token' => $access_token,
       ],
     ], TRUE);
     $response->addCommand($command);
