@@ -110,7 +110,7 @@ class JwtJsSubscriber implements EventSubscriberInterface {
     $jwt = $this->getAccessToken();
     if ($this->isAccessTokenExpired($jwt)) {
       $access_token = $this->jwtAuth->generateToken();
-      $this->setAccessToken('jwt_access_token', $access_token);
+      $this->setAccessToken($access_token);
     }
   }
 
