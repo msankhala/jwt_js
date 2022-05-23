@@ -1,0 +1,16 @@
+{
+    "name": "msankhala/jwt_js",
+    "description": "A module that generates jwt token on login and pass to drupalSettings",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Mahesh",
+            "email": "maheshsainni@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "drupal/jwt": "^1.0@RC"
+    }
+}
